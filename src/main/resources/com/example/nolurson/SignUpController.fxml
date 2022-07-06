@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.SignUpController">
+   <left>
+      <AnchorPane prefHeight="566.0" prefWidth="388.0" style="-fx-background-color: #8B0000;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="54.0" layoutY="182.0" prefHeight="173.0" prefWidth="279.0" text="Grundlagen dem Besitz" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="124.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@adalet-logo-551A396F76-seeklogo.com.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="566.0" prefWidth="535.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="logoutButton" layoutX="492.0" layoutY="7.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" style="-fx-background-color: #8B0000;" text="X" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="90.0" layoutY="167.0" text="Benutzername">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameTextField" layoutX="228.0" layoutY="162.0" promptText="Benutzername" />
+            <Label layoutX="90.0" layoutY="210.0" prefHeight="21.0" prefWidth="96.0" text="Passwort">
+               <font>
+                  <Font name="Calibri Bold" size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwortTextField" layoutX="228.0" layoutY="217.0" promptText="Passwort" />
+            <Button fx:id="registerButton" layoutX="90.0" layoutY="338.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="326.0" style="-fx-background-color: #8B0000;" text="REGISTRIEREN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

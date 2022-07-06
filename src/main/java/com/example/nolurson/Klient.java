@@ -7,19 +7,58 @@ import java.util.List;
 public class Klient extends Person{
     private String beruf;
     private String eheStatus;
-    private Date terminDatum;
-    private List<Rechtsfall> Rechtsfall;
+    private String terminDatum;
+    private String burgerId;
+    private String vorname;
+    private String nachname;
 
-    public Klient(String vorname, String nachname, String BurgerId, String adresse, Date geburtsdatum, int telefonnummer, String geschlecht, String mailAdresse, String beruf, String eheStatus, Date terminDatum, List<Rechtsfall> rechtsfall) {
+
+    public Klient(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse, String beruf, String eheStatus, String terminDatum, List<Rechtsfall> rechtsfall) {
         super(vorname, nachname, BurgerId, adresse, geburtsdatum, telefonnummer, geschlecht, mailAdresse);
         this.beruf=beruf;
         this.eheStatus=eheStatus;
         this.terminDatum=terminDatum;
-        Rechtsfall=rechtsfall;
+
     }
 
-    public Klient(String burgerId, String vorname, String nachname, java.sql.Date geburtsdatum, String adresse, String telefonnummer, String geschlecht, String email, String beruf, String eheStatus, java.sql.Date termin) {
+    public Klient(String burgerId, String vorname, String nachname, String geburtsdatum, String adresse, String telefonnummer, String geschlecht, String email, String beruf, String eheStatus, String termin) {
         super();
+    }
+
+    public Klient(String burgerId, String vorname, String nachname) {
+       super();
+    }
+
+    public Klient() {
+
+    }
+
+    public String getBurgerId() {
+        return burgerId;
+    }
+
+    public void setBurgerId(String burgerId) {
+        this.burgerId = burgerId;
+    }
+
+    @Override
+    public String getVorname() {
+        return vorname;
+    }
+
+    @Override
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    @Override
+    public String getNachname() {
+        return nachname;
+    }
+
+    @Override
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
     public String getBeruf() {
@@ -44,19 +83,13 @@ public class Klient extends Person{
         return datum;
     }
 
-    public void setTerminDatum(Date terminDatum) {
+    public void setTerminDatum(String terminDatum) {
         this.terminDatum = terminDatum;
     }
 
-    public List<com.example.nolurson.Rechtsfall> getRechtsfall() {
-        return Rechtsfall;
-    }
-
-    public void setRechtsfall(List<com.example.nolurson.Rechtsfall> rechtsfall) {
-        Rechtsfall = rechtsfall;
-    }
     @Override
     public String toString(){
-        return super.toString()+" "+beruf+" "+eheStatus+" "+Rechtsfall+" "+terminDatum;
+        return super.toString()+" "+beruf+" "+eheStatus+" "+terminDatum;
     }
 }
+

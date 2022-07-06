@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AnwaltsLeiter extends Benutzer {
-    public AnwaltsLeiter(String vorname, String nachname, String BurgerId, String adresse, Date geburtsdatum, int telefonnummer, String geschlecht, String mailAdresse, String personalID, String pswort, String bname, String aStelle) {
+    public AnwaltsLeiter(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse, String personalID, String pswort, String bname, String aStelle) {
         super(vorname, nachname, BurgerId, adresse, geburtsdatum, telefonnummer, geschlecht, mailAdresse, personalID, pswort, bname, aStelle);
     }
     private ArrayList<Klient> Klient;

@@ -30,8 +30,6 @@ public class BenutzerController  {
     @FXML
     private Button deleteUser;
 
-    @FXML
-    private AnchorPane scenePane;
 
     @FXML
     private Button addUser;

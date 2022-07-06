@@ -5,7 +5,7 @@ import java.util.Date;
 public class Fallsbetreffende extends Person{
     private String interesse;
 
-    public Fallsbetreffende(String vorname, String nachname, String BurgerId, String adresse, Date geburtsdatum, int telefonnummer, String geschlecht, String mailAdresse, String interesse) {
+    public Fallsbetreffende(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse, String interesse) {
         super(vorname, nachname, BurgerId, adresse, geburtsdatum, telefonnummer, geschlecht, mailAdresse);
         this.interesse= interesse;
     }

@@ -8,8 +8,8 @@ public class Person {
     private String Nachname;
     private String BurgerID;
     private String Adresse;
-    private Date Geburtsdatum;
-    private int Telefonnummer;
+    private String Geburtsdatum;
+    private String Telefonnummer;
     private String Geschlecht;
     private String MailAdresse;
 
@@ -53,19 +53,19 @@ public class Person {
         Adresse = adresse;
     }
 
-    public Date getGeburtsdatum() {
+    public String  getGeburtsdatum() {
         return Geburtsdatum;
     }
 
-    public void setGeburtsdatum(Date geburtsdatum) {
+    public void setGeburtsdatum(String  geburtsdatum) {
         Geburtsdatum = geburtsdatum;
     }
 
-    public int getTelefonnummer() {
+    public String  getTelefonnummer() {
         return Telefonnummer;
     }
 
-    public void setTelefonnummer(int telefonnummer) {
+    public void setTelefonnummer(String telefonnummer) {
         Telefonnummer = telefonnummer;
     }
 
@@ -85,7 +85,7 @@ public class Person {
         MailAdresse = mailAdresse;
     }
 
-    public Person(String vorname, String nachname,String BurgerId, String adresse, Date geburtsdatum, int telefonnummer, String geschlecht, String mailAdresse){
+    public Person(String vorname, String nachname,String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse){
         Vorname=vorname;
         Nachname=nachname;
         this.BurgerID=BurgerId;
@@ -101,12 +101,13 @@ public class Person {
         return Vorname + " " + Nachname+" "+BurgerID+" "+Adresse+" "+Geburtsdatum+" "+Telefonnummer+" "+Geschlecht+" "+MailAdresse;
     }
 
-    @Override
+
+    /*@Override
     public boolean equals(Object o){
         Person a =(Person) o;
         if(a.getBurgerID().equals(this.BurgerID)) return true;
         else return false;
-    }
+    }*/
 
 
 }
