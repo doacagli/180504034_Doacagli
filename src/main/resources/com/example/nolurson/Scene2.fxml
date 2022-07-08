@@ -2,36 +2,58 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="881.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.Scene2Controller">
-   <children>
-      <AnchorPane prefHeight="200.0" prefWidth="881.0" style="-fx-background-color: #8B0000;">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.Scene2Controller">
+   <left>
+      <AnchorPane prefHeight="566.0" prefWidth="385.0" style="-fx-background-color: #8B0000;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="74.0" prefHeight="53.0" prefWidth="689.0" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="728.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="124.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@adalet-logo-551A396F76-seeklogo.com.png" />
                </image>
             </ImageView>
+            <Label layoutX="62.0" layoutY="222.0" prefHeight="173.0" prefWidth="279.0" text="Grundlagen dem Besitz" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <Label fx:id="nameLabel" layoutX="67.0" layoutY="378.0" prefHeight="35.0" prefWidth="252.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="klientButton" layoutX="123.0" layoutY="266.0" mnemonicParsing="false" onAction="#klientThing" prefHeight="109.0" prefWidth="260.0" style="-fx-background-color: #8B0000;" text="KLIENTINFORMATIONEN" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="userButton" layoutX="518.0" layoutY="266.0" mnemonicParsing="false" onAction="#userThing" prefHeight="109.0" prefWidth="260.0" style="-fx-background-color: #8B0000;" text="BENUTZERSVERFAHREN" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-   </children>
-</AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="566.0" prefWidth="647.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="klientButton" layoutX="87.0" layoutY="187.0" mnemonicParsing="false" onAction="#klientThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="KUNDENVERFAHREN" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="logout" layoutX="492.0" layoutY="7.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" style="-fx-background-color: #8B0000;" text="X" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="userButton" layoutX="85.0" layoutY="283.0" mnemonicParsing="false" onAction="#userThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="BENUTZERVERFAHREN" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

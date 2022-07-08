@@ -16,13 +16,17 @@ public class Benutzer extends Person{
         this.Arbeitsstelle=aStelle;
 
     }
+    public Benutzer(String Benutzername, String PersonalID) {
+       this.Benutzername = Benutzername;
+       this.PersonalID = PersonalID;
+    }
 
     public String getPersonalID() {
         return PersonalID;
     }
 
     public void setPersonalID(String personalID) {
-        PersonalID = personalID;
+        PersonalID = PersonalID;
     }
 
     public String getPasswort() {

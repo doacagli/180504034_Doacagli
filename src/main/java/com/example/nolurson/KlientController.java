@@ -85,8 +85,8 @@ public class KlientController implements Initializable{
         col_vorn.setCellValueFactory(new PropertyValueFactory<Klient,String>("nachname"));
 
 
-        listKlient = Database.getDataklients();
-        table_klient.setItems(listKlient);
+      /*  listKlient = Database.getDataklients();
+        table_klient.setItems(listKlient);*/
 
     }
 
@@ -110,7 +110,6 @@ public class KlientController implements Initializable{
 
         Klient klient = new Klient(burgerId, vorname, nachname);
         Database.addKlient(klient);
-
 
     }
 

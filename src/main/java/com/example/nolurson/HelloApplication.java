@@ -29,6 +29,7 @@ public class HelloApplication extends Application {
         }
         Database database = new Database();
         database.connect();
+        Database.listBenutzer();
     }
         public static void main (String[]args){
 

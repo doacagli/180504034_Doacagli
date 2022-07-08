@@ -22,6 +22,8 @@ public class Scene2Controller {
     private Button userButton;
     @FXML
     private Button klientButton;
+    @FXML
+    private Button logout;
 
 
 
@@ -30,8 +32,10 @@ public class Scene2Controller {
         nameLabel.setText("Willkommen " + username);
     }
     public void userThing(ActionEvent event) throws IOException {
-        FXMLLoader a = new FXMLLoader(getClass().getResource("BenutzerController.fxml"));
-        root = a.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BenutzerController.fxml"));
+        Parent root = loader.load();
+//        BenutzerController controller = loader.getController();
+//        controller.getallUser();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -45,6 +49,11 @@ public class Scene2Controller {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    public void logOut(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        System.out.println("you successfully loggod out");
+        stage.close();
     }
 
 }
