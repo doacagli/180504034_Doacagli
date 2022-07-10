@@ -16,9 +16,11 @@ public class Benutzer extends Person{
         this.Arbeitsstelle=aStelle;
 
     }
-    public Benutzer(String Benutzername, String PersonalID) {
+    public Benutzer(String Benutzername, String PersonalID, String Arbeitsstelle, String Passwort) {
        this.Benutzername = Benutzername;
        this.PersonalID = PersonalID;
+       this.Passwort = Passwort;
+       this.Arbeitsstelle = Arbeitsstelle;
     }
 
     public String getPersonalID() {

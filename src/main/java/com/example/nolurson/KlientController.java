@@ -52,13 +52,31 @@ public class KlientController implements Initializable{
     private TableView<Klient> table_klient;
 
     @FXML
-    private TableColumn<Klient, String> col_id;
-
-    @FXML
     private TableColumn<Klient, String> col_nam;
 
     @FXML
-    private TableColumn<Klient, String > col_vorn;
+    private TableColumn<Klient, String> col_nachn;
+
+    @FXML
+    private TableColumn<Klient, String> col_id;
+
+    @FXML
+    private TableColumn<Klient, String> col_adresse;
+
+    @FXML
+    private TableColumn<Klient, String> col_tel;
+
+    @FXML
+    private TableColumn<Klient, String> col_bdate;
+
+    @FXML
+    private TableColumn<Klient, String> col_sex;
+
+    @FXML
+    private TableColumn<Klient, String> col_mail;
+
+    @FXML
+    private TableColumn<Klient, String> col_dateinnm;
 
     @FXML
     private TextField txt_id;
@@ -80,17 +98,25 @@ public class KlientController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        col_id.setCellValueFactory(new PropertyValueFactory<Klient,String>("burgerId"));
-        col_nam.setCellValueFactory(new PropertyValueFactory<Klient,String>("vorname"));
-        col_vorn.setCellValueFactory(new PropertyValueFactory<Klient,String>("nachname"));
+        col_nam.setCellValueFactory(new PropertyValueFactory<Klient,String>("Vorname"));
+        col_nachn.setCellValueFactory(new PropertyValueFactory<Klient,String>("Nachname"));
+        col_id.setCellValueFactory(new PropertyValueFactory<Klient,String>("BurgerID"));
+        col_adresse.setCellValueFactory(new PropertyValueFactory<Klient, String >("Adresse"));
+        col_tel.setCellValueFactory(new PropertyValueFactory<Klient, String>("Telefonnummer"));
+        col_bdate.setCellValueFactory(new PropertyValueFactory<Klient, String>("Geburtsdatum"));
+        col_sex.setCellValueFactory(new PropertyValueFactory<Klient, String>("Geschlecht"));
+        col_mail.setCellValueFactory(new PropertyValueFactory<Klient, String >("MailAdresse"));
+        col_dateinnm.setCellValueFactory(new PropertyValueFactory<Klient, String>("DateinNummer"));
 
-
-      /*  listKlient = Database.getDataklients();
-        table_klient.setItems(listKlient);*/
-
+        table_klient.setItems(List());
     }
 
+    @FXML
+    public ObservableList List(){
+        ObservableList arr = Database.listKlient();
 
+        return arr;
+    }
     public void backTo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -103,32 +129,6 @@ public class KlientController implements Initializable{
         System.out.println("you successfully loggod out");
         stage.close();
     }
-    public void addKlient(){
-        String burgerId = txt_id.getText();
-        String vorname = txt_name.getText();
-        String  nachname = txt_nname.getText();
-
-        Klient klient = new Klient(burgerId, vorname, nachname);
-        Database.addKlient(klient);
-
-    }
-
-    /*public void klientList() {
-
-        ksc.getChildren().clear();
-        ArrayList<Klient> klients = Database.getKlient();
-        for(int i = 0; i < klients.size(); i++) {
-            FXMLLoader klientItem = new FXMLLoader(getClass().getResource("KundeItem.fxml"));
-            try {
-                ksc.getChildren().add(klientItem.load());
-                KundeItemController kundeItemController = klientItem.getController();
-                kundeItemController.setKlientItem(klients.get(i));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }*/
-
 
 
 

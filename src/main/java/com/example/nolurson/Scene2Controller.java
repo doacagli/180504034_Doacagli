@@ -32,15 +32,12 @@ public class Scene2Controller {
         nameLabel.setText("Willkommen " + username);
     }
     public void userThing(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BenutzerController.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminController.fxml"));
         Parent root = loader.load();
-//        BenutzerController controller = loader.getController();
-//        controller.getallUser();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
     public void klientThing(ActionEvent event) throws IOException{
         FXMLLoader aa = new FXMLLoader(getClass().getResource("KlientController.fxml"));

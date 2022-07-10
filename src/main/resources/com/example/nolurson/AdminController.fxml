@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="scenepane" prefHeight="566.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.BenutzerController">
+<AnchorPane fx:id="scenepane" prefHeight="566.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.AdminController">
    <children>
       <AnchorPane prefHeight="566.0" prefWidth="385.0" style="-fx-background-color: #8B0000;">
          <children>
-            <Button fx:id="deleteButton" layoutX="150.0" layoutY="301.0" mnemonicParsing="false" onAction="#deleteBenutzer" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #ffff;" text="Loeschen" />
-            <Button fx:id="addButton" layoutX="124.0" layoutY="361.0" mnemonicParsing="false" onAction="#addUser" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #fff;" text="Einfuegen" />
+            <Button fx:id="deleteButton" layoutX="150.0" layoutY="301.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #ffff;" text="Loeschen" />
+            <Button fx:id="addButton" layoutX="151.0" layoutY="346.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #fff;" text="Einfuegen" />
             <Label layoutX="53.0" layoutY="176.0" prefHeight="21.0" prefWidth="162.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
@@ -46,8 +46,10 @@
       </ButtonBar>
       <TableView fx:id="BenutzerTableView" layoutX="387.0" layoutY="165.0" prefHeight="354.0" prefWidth="532.0">
         <columns>
-          <TableColumn fx:id="BenutzernameID" prefWidth="256.0" text="Benutzername" />
-          <TableColumn fx:id="PersonalIDID" minWidth="0.0" prefWidth="274.0" text="PersonalID" />
+          <TableColumn fx:id="BenutzernameID" prefWidth="133.0" text="Benutzername" />
+          <TableColumn fx:id="PersonalIDID" minWidth="0.0" prefWidth="143.0" text="PersonalID" />
+            <TableColumn fx:id="col_passwort" prefWidth="112.0" text="Passwort" />
+            <TableColumn fx:id="col_arbeit" prefWidth="142.0" text="Arbeitsstelle" />
         </columns>
       </TableView>
       <Label layoutX="396.0" layoutY="68.0" prefHeight="21.0" prefWidth="179.0" text="Wahlen Sie Bitte Personal" />

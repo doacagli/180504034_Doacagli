@@ -35,13 +35,6 @@ public class Database {
             System.out.println(e.getMessage());
         }
     }
-    public static void addUser() throws SQLException {
-        stmt = conn.createStatement();
-        //stmt.executeUpdate("INSERT INTO BENUTZER(Benutzername, Passwort, PersonalID) VALUES( )
-
-
-
-    }
 
    public static boolean findUser(String username, String passwort) {
         //connect();
@@ -62,8 +55,23 @@ public class Database {
         }
         return false;
     }
+    public static boolean findAdmin(String Arbeitsstelle){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT Arbeitsstelle FROM Benutzer");
+            while (res.next()){
+                String s1 = res.getString("Arbeitsstelle");
+                if(s1.equals(Arbeitsstelle)){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
-    public static void addKlient(Klient k){
+   /* public static void addKlient(Klient k){
         String sql = "INSERT INTO Kunde (BURGERID, NAME, LASTNAME) VALUES(?,?,?)";
         try{
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -76,19 +84,21 @@ public class Database {
             e.printStackTrace();
         }
 
-    }
+    }*/
     public static ObservableList listBenutzer() {
         ObservableList<Benutzer> arr = FXCollections.observableArrayList();
 
         try{
             stmt = conn.createStatement();
-            ResultSet res= stmt.executeQuery("SELECT Benutzername, PersonalID FROM Benutzer");
+            ResultSet res= stmt.executeQuery("SELECT Benutzername, PersonalID, Arbeitsstelle, Passwort FROM Benutzer");
             while (res.next()){
                 String s = res.getString("Benutzername");
                 String s1 = res.getString("PersonalID");
+                String s2 = res.getString("Passwort");
+                String s3 = res.getString("Arbeitsstelle");
                 System.out.println(s + s1);
 
-                arr.add(new Benutzer(s,s1));
+                arr.add(new Benutzer(s,s1,s2,s3));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -104,6 +114,50 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    //list Klient
+    public static ObservableList<Klient> listKlient() {
+        ObservableList<Klient> arr = FXCollections.observableArrayList();
+
+        try{
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Klient.DateinNummer, Klient.BurgerID, Person.Vorname, Person.Nachname, Person.BurgerID, Person.Adresse, Person.Telefonnummer, Person.Geburtsdatum, Person.MailAdresse, Person.Geschlecht FROM Person, Klient WHERE Person.BurgerID == Klient.BurgerID");
+            while (res.next()){
+                String s = res.getString("Vorname");
+                String s1 = res.getString("Nachname");
+                String s2 = res.getString("BurgerID");
+                String s3 = res.getString("Adresse");
+                String s4 = res.getString("Telefonnummer");
+                String s5 = res.getString("Geburtsdatum");
+                String s6 = res.getString("Geschlecht");
+                String s7 = res.getString("MailAdresse");
+                String s8 = res.getString("DateinNummer");
+                System.out.println(s + s1);
+
+                arr.add(new Klient(s,s1,s2,s3,s4,s5,s6,s7,s8));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return arr;
+    }
+    //control admin
+    public static Boolean controllAdmin(String Benutzername){
+        //this.connect();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT Arbeitsstelle,Benutzername FROM Benutzer ");
+            while (res.next()){
+                String s1 = res.getString("Arbeitsstelle");
+                String s2 = res.getString("Benutzername");
+                if(s1.equals("Admin") && s2.equals(Benutzername)){
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
     }
 
 }

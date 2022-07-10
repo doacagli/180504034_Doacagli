@@ -65,15 +65,6 @@ public class Scene1Controller {
         }
     }
 
-    public void addUser(ActionEvent event) throws IOException{
-        FXMLLoader b = new FXMLLoader(getClass().getResource("SignUpController.fxml"));
-        root = b.load();
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void logOut(ActionEvent event){
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         System.out.println("you successfully loggod out");

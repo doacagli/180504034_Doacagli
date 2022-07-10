@@ -2,31 +2,22 @@ package com.example.nolurson;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class BenutzerController implements Initializable {
+public class AdminController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -38,16 +29,12 @@ public class BenutzerController implements Initializable {
     private Button backToButton;
 
     @FXML
-    private Button deleteUser;
-
-    @FXML
     private Button addUser;
     
     @FXML
     private TextField deleteBenutzer;
     @FXML
     private Button deleteButton;
-    
 
     @FXML
     private TableView<Benutzer> BenutzerTableView;
@@ -60,6 +47,12 @@ public class BenutzerController implements Initializable {
 
     @FXML
     private TextField keywordsTextfield;
+    @FXML
+    private TableColumn<Benutzer, String > col_passwort;
+
+    @FXML
+    private TableColumn<Benutzer, String> col_arbeit;
+
 
     ObservableList<Benutzer> Benutzerlist = FXCollections.observableArrayList();
     //Benutzerlist = ListBenutzer();
@@ -75,6 +68,8 @@ public class BenutzerController implements Initializable {
 
             BenutzernameID.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("Benutzername"));
             PersonalIDID.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("PersonalID"));
+            col_passwort.setCellValueFactory(new PropertyValueFactory<Benutzer, String >("Passwort"));
+            col_arbeit.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("Arbeitsstelle"));
 
             BenutzerTableView.setItems(ListBenutzer());
     }
@@ -94,7 +89,6 @@ public class BenutzerController implements Initializable {
 
     public void deleteBenutzer(ActionEvent event) throws IOException {
         Database.deleteBenutzer(deleteBenutzer.getText());
-
 
     }
 
