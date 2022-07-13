@@ -22,11 +22,11 @@
                   <Image url="@adalet-logo-551A396F76-seeklogo.com.png" />
                </image>
             </ImageView>
-            <Button fx:id="deleteButton" layoutX="20.0" layoutY="481.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: #ffff;" text="Loeschen">
+            <Button fx:id="deleteButton" layoutX="20.0" layoutY="481.0" mnemonicParsing="false" onAction="#deleteKlient" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: #ffff;" text="Loeschen">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font></Button>
-            <Button fx:id="addButton" layoutX="158.0" layoutY="481.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: #fff;" text="Einfuegen">
+            <Button fx:id="addButton" layoutX="151.0" layoutY="481.0" mnemonicParsing="false" onAction="#addKlient" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: #fff;" text="Einfuegen">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font></Button>
@@ -43,12 +43,12 @@
                   <Font name="Calibri Bold" size="18.0" />
                </font>
             </Button>
-            <ChoiceBox layoutX="25.0" layoutY="298.0" prefHeight="31.0" prefWidth="93.0" />
-            <TextField fx:id="txt_id1" layoutX="25.0" layoutY="253.0" prefHeight="31.0" prefWidth="93.0" promptText="Telefonnummer" />
-            <TextField fx:id="txt_id11" layoutX="151.0" layoutY="209.0" prefHeight="31.0" prefWidth="93.0" promptText="Adresse" />
-            <TextField fx:id="txt_id12" layoutX="145.0" layoutY="298.0" prefHeight="31.0" prefWidth="93.0" promptText="Mail" />
-            <TextField fx:id="txt_id13" layoutX="68.0" layoutY="348.0" prefHeight="31.0" prefWidth="132.0" promptText="Datein Nummer" />
-            <DatePicker layoutX="145.0" layoutY="253.0" prefHeight="31.0" prefWidth="93.0" promptText="Geburtsdatum" />
+            <ChoiceBox fx:id="myChoiceBox" layoutX="25.0" layoutY="298.0" prefHeight="31.0" prefWidth="93.0" />
+            <TextField fx:id="txt_tel" layoutX="25.0" layoutY="253.0" prefHeight="31.0" prefWidth="93.0" promptText="Telefonnummer" />
+            <TextField fx:id="txt_adresse" layoutX="151.0" layoutY="209.0" prefHeight="31.0" prefWidth="93.0" promptText="Adresse" />
+            <TextField fx:id="txt_mail" layoutX="145.0" layoutY="298.0" prefHeight="31.0" prefWidth="93.0" promptText="Mail" />
+            <TextField fx:id="txt_dateinnummer" layoutX="68.0" layoutY="348.0" prefHeight="31.0" prefWidth="132.0" promptText="Datein Nummer" />
+            <DatePicker fx:id="DateBox" layoutX="145.0" layoutY="253.0" prefHeight="31.0" prefWidth="93.0" promptText="Geburtsdatum" />
          </children>
       </AnchorPane>
       <ButtonBar layoutX="669.0" prefHeight="48.0" prefWidth="250.0">
@@ -65,7 +65,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <TableView fx:id="table_klient" layoutX="281.0" layoutY="46.0" prefHeight="520.0" prefWidth="638.0">
+      <TableView fx:id="table_klient" layoutX="284.0" layoutY="46.0" prefHeight="520.0" prefWidth="635.0">
         <columns>
           <TableColumn fx:id="col_nam" prefWidth="111.0" text="Vorname" />
             <TableColumn fx:id="col_nachn" prefWidth="54.0" text="Nachname" />
@@ -78,5 +78,6 @@
             <TableColumn fx:id="col_dateinnm" prefWidth="27.0" text="Datein No" />
         </columns>
       </TableView>
+      <Label fx:id="errorMessage" layoutX="291.0" layoutY="14.0" />
    </children>
 </AnchorPane>

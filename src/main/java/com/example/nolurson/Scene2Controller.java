@@ -52,5 +52,14 @@ public class Scene2Controller {
         System.out.println("you successfully loggod out");
         stage.close();
     }
+    public void rechtThing(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RechtsfallController.fxml"));
+        Parent bb = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(bb);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 }

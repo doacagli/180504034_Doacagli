@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,8 +17,8 @@
    <children>
       <AnchorPane prefHeight="566.0" prefWidth="385.0" style="-fx-background-color: #8B0000;">
          <children>
-            <Button fx:id="deleteButton" layoutX="150.0" layoutY="301.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #ffff;" text="Loeschen" />
-            <Button fx:id="addButton" layoutX="151.0" layoutY="346.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #fff;" text="Einfuegen" />
+            <Button fx:id="deleteButton" layoutX="27.0" layoutY="507.0" mnemonicParsing="false" onAction="#deleteBenutzer" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #ffff;" text="Loeschen" />
+            <Button fx:id="addButton" layoutX="200.0" layoutY="507.0" mnemonicParsing="false" onAction="#addBenutzer" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #fff;" text="Einfuegen" />
             <Label layoutX="53.0" layoutY="176.0" prefHeight="21.0" prefWidth="162.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
@@ -27,7 +29,18 @@
                   <Image url="@adalet-logo-551A396F76-seeklogo.com.png" />
                </image>
             </ImageView>
-            <TextField fx:id="deleteBenutzer" layoutX="91.0" layoutY="252.0" promptText="Burger ID" />
+            <TextField fx:id="txt_pid" layoutX="38.0" layoutY="231.0" prefHeight="31.0" prefWidth="116.0" promptText="Personal ID" />
+            <TextField fx:id="txt_bn" layoutX="212.0" layoutY="231.0" prefHeight="31.0" prefWidth="116.0" promptText="Benutzername" />
+            <TextField fx:id="txt_pss" layoutX="38.0" layoutY="277.0" prefHeight="31.0" prefWidth="116.0" promptText="Passwort" />
+            <ChoiceBox fx:id="adminbox" layoutX="212.0" layoutY="277.0" prefHeight="31.0" prefWidth="116.0" />
+            <TextField fx:id="txt_bid" layoutX="38.0" layoutY="323.0" prefHeight="31.0" prefWidth="116.0" promptText="Burger ID" />
+            <TextField fx:id="txt_vn" layoutX="212.0" layoutY="323.0" prefHeight="31.0" prefWidth="116.0" promptText="Vorname" />
+            <TextField fx:id="txt_nn" layoutX="38.0" layoutY="372.0" prefHeight="31.0" prefWidth="116.0" promptText="Nachname" />
+            <TextField fx:id="txt_adresse" layoutX="212.0" layoutY="372.0" prefHeight="31.0" prefWidth="116.0" promptText="Adresse" />
+            <TextField fx:id="txt_tel" layoutX="212.0" layoutY="460.0" prefHeight="31.0" prefWidth="116.0" promptText="Telefonnummer" />
+            <ChoiceBox fx:id="myChoiceBox" layoutX="39.0" layoutY="460.0" prefHeight="31.0" prefWidth="116.0" />
+            <TextField fx:id="txt_mail" layoutX="212.0" layoutY="413.0" prefHeight="31.0" prefWidth="116.0" promptText="Mail" />
+            <DatePicker fx:id="DateBox" layoutX="39.0" layoutY="413.0" prefHeight="31.0" prefWidth="116.0" promptText="Geburtsdatum" />
          </children>
       </AnchorPane>
       <ButtonBar layoutX="584.0" layoutY="14.0" prefHeight="31.0" prefWidth="322.0">
@@ -46,13 +59,17 @@
       </ButtonBar>
       <TableView fx:id="BenutzerTableView" layoutX="387.0" layoutY="165.0" prefHeight="354.0" prefWidth="532.0">
         <columns>
-          <TableColumn fx:id="BenutzernameID" prefWidth="133.0" text="Benutzername" />
-          <TableColumn fx:id="PersonalIDID" minWidth="0.0" prefWidth="143.0" text="PersonalID" />
-            <TableColumn fx:id="col_passwort" prefWidth="112.0" text="Passwort" />
-            <TableColumn fx:id="col_arbeit" prefWidth="142.0" text="Arbeitsstelle" />
+          <TableColumn fx:id="BenutzernameID" prefWidth="109.0" text="Benutzername" />
+          <TableColumn fx:id="PersonalIDID" minWidth="0.0" prefWidth="98.0" text="PersonalID" />
+            <TableColumn fx:id="col_passwort" prefWidth="83.0" text="Passwort" />
+            <TableColumn fx:id="col_arbeit" prefWidth="113.0" text="Arbeitsstelle" />
+            <TableColumn fx:id="txt_bidd" prefWidth="128.0" text="BurgerID" />
         </columns>
       </TableView>
       <Label layoutX="396.0" layoutY="68.0" prefHeight="21.0" prefWidth="179.0" text="Wahlen Sie Bitte Personal" />
       <TextField fx:id="keywordsTextfield" layoutX="599.0" layoutY="63.0" prefHeight="31.0" prefWidth="307.0" promptText="BurgerID" />
+      <Label fx:id="errormess" layoutX="405.0" layoutY="131.0" />
+      <ChoiceBox fx:id="updatebox" layoutX="578.0" layoutY="116.0" prefWidth="150.0" />
+      <Button fx:id="but_update" layoutX="771.0" layoutY="116.0" mnemonicParsing="false" onAction="#UpdateSeite" style="-fx-background-color: #fff;" text="Aktualisierung" />
    </children>
 </AnchorPane>

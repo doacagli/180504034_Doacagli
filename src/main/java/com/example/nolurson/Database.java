@@ -27,10 +27,10 @@ public class Database {
             stmt = conn.createStatement();
             //stm.executeUpdate("INSERT INTO Person (NAME,LASTNAME,ID,AGE) VALUES('Doa','Cagli','123456789',22)");
             //stm.executeUpdate("INSERT INTO PERSONAL(USERNAME, PASSWORD) VALUES('Doacagli','123456')");
-            ResultSet res = stmt.executeQuery("SELECT * FROM Person");
-            if (res.next()) {
-                System.out.println("username: " + res.getString("NAME"));
-            }
+//            ResultSet res = stmt.executeQuery("SELECT * FROM Person");
+//            if (res.next()) {
+//                System.out.println("username: " + res.getString("NAME"));
+//            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -71,34 +71,21 @@ public class Database {
         return false;
     }
 
-   /* public static void addKlient(Klient k){
-        String sql = "INSERT INTO Kunde (BURGERID, NAME, LASTNAME) VALUES(?,?,?)";
-        try{
-            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1,k.getBurgerId());
-//            ps.setString(2,k.getVorname());
-//            ps.setString(3,k.getNachname());
-
-            ps.executeUpdate();
-                } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }*/
     public static ObservableList listBenutzer() {
         ObservableList<Benutzer> arr = FXCollections.observableArrayList();
 
         try{
             stmt = conn.createStatement();
-            ResultSet res= stmt.executeQuery("SELECT Benutzername, PersonalID, Arbeitsstelle, Passwort FROM Benutzer");
+            ResultSet res= stmt.executeQuery("SELECT Benutzername, PersonalID, Arbeitsstelle, Passwort, BurgerID FROM Benutzer");
             while (res.next()){
                 String s = res.getString("Benutzername");
                 String s1 = res.getString("PersonalID");
                 String s2 = res.getString("Passwort");
                 String s3 = res.getString("Arbeitsstelle");
-                System.out.println(s + s1);
+                String s4 = res.getString("BurgerID");
+                //System.out.println(s + s1);
 
-                arr.add(new Benutzer(s,s1,s2,s3));
+                arr.add(new Benutzer(s,s1,s2,s3,s4));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -107,10 +94,10 @@ public class Database {
     }
     public static void deleteBenutzer(String BurgerID){
         try {
-            System.out.println("DELETE FROM Benutzer WHERE Benutzer.PersonalID="+BurgerID);
+            //System.out.println("DELETE FROM Benutzer WHERE Benutzer.PersonalID="+BurgerID);
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("DELETE FROM Benutzer WHERE Benutzer.PersonalID="+BurgerID);
-            //stmt.executeUpdate("DELETE FROM Person WHERE Person.BurgerID="+BurgerID);
+            stmt.executeUpdate("DELETE FROM Benutzer WHERE Benutzer.BurgerID="+BurgerID);
+            stmt.executeUpdate("DELETE FROM Person WHERE Person.BurgerID="+BurgerID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,8 +128,31 @@ public class Database {
         }
         return arr;
     }
+    //delete Klient
+    public static void deleteKlient(String BurgerID){
+
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE FROM Klient WHERE Klient.BurgerID="+BurgerID);
+            stmt.executeUpdate("DELETE FROM Person WHERE Person.BurgerID="+BurgerID);
+        }catch (Exception E){
+            System.out.println(E);
+        }
+    }
+    public static void updateBenutzername(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Benutzer SET Benutzername = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+            //"UPDATE Benutzer SET passwort = '" + pass + "' WHERE trID = '" + id +"'"
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //control admin
-    public static Boolean controllAdmin(String Benutzername){
+    public static Boolean containAdmin(String Benutzername){
         //this.connect();
         try {
             Statement stmt = conn.createStatement();
@@ -158,6 +168,102 @@ public class Database {
             System.out.println(e);
         }
         return false;
+    }
+
+    public static boolean containKlient(String BurgerID) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT BurgerID FROM Person");
+            while (res.next()){
+                String s1 = res.getString("BurgerID");
+                if(s1.equals(BurgerID)){
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static Boolean addKlient(String BurgerID, String n, String nn, String  gbd, String ma, String add, String tel, String gs, String dn){
+        if(!Database.containKlient(BurgerID)){
+            //System.out.println(GDatum);
+            String s1 = "INSERT INTO Person (BurgerID,Vorname,Nachname,Adresse,Telefonnummer, Geburtsdatum, MailAdresse, Geschlecht) VALUES('"+BurgerID+"','"+n+"','"+nn+"','" + gbd + "','"+ma+"','"+add+"','"+tel+"','"+gs+"');";
+            String s2 = "INSERT INTO Klient (BurgerID, DateinNummer) VALUES('"+BurgerID+"','"+gs+"');";
+        /*System.out.println(s1);
+        System.out.println(s2);*/
+
+            try {
+                stmt.executeUpdate(s1);
+                stmt.executeUpdate(s2);
+            }catch (Exception e){
+                System.out.println(e);
+            }
+            return true;
+        }else{
+            return false;
+
+        }
+
+    }
+    public static Boolean containBenutzer(String Benutzername, String passwort){
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT Benutzername , Passwort FROM Benutzer");
+            while (res.next()){
+                String s1 = res.getString("Benutzername");
+                String s2 = res.getString("Passwort");
+                if(s1.equals(Benutzername) && s2.equals(passwort)){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    public static Boolean addBenutzer(String BurgerID, String vorn, String nachn, String  add, String tel, String gbd, String ma, String ges, String pid, String bn, String ps, String as){
+        if(!Database.containBenutzer(bn,ps)){
+
+            String s1 = "INSERT INTO Person (BurgerID,Vorname,Nachname,Adresse,Telefonnummer, Geburtsdatum, MailAdresse, Geschlecht) VALUES('"+BurgerID+"','"+vorn+"','"+nachn+"','" + add + "','"+tel+"','"+gbd+"','" + ma +"','"+ges+"');";
+            String s2 = "INSERT INTO Benutzer (PersonalID,Benutzername,Passwort,Arbeitsstelle,BurgerID) VALUES('"+pid+"','"+bn+"','"+as+"','"+ps+"','"+BurgerID+"');";
+
+
+            try {
+                stmt.executeUpdate(s1);
+                stmt.executeUpdate(s2);
+            }catch (Exception e){
+                System.out.println(e);
+            }
+            return true;
+        }else{
+            return false;
+
+        }
+
+    }
+    public static ObservableList<Rechtsfall> listRechtsfall() {
+        ObservableList<Rechtsfall> arr = FXCollections.observableArrayList();
+
+        try{
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Rechtsfall.DateinNummer, Rechtsfall.TerminDatum, Rechtsfall.PersonalID, Rechtsfall.BurgerID, Fallsbetreffende.BurgerId, Fallsbetreffende.DateinNummer FROM Rechtsfall, Klient, Fallsbetreffende WHERE (Rechtsfall.DateinNummer == Fallsbetreffende.DateinNummer)");
+            while (res.next()){
+                String s = res.getString("PersonalID");
+                String s1 = res.getString("TerminDatum");
+                String s2 = res.getString("DateinNummer");
+                String s3 = res.getString("BurgerId");
+                String s4 = res.getString("BurgerID");
+
+                arr.add(new Rechtsfall(s,s1,s2,s3,s4));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return arr;
     }
 
 }

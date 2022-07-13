@@ -1,30 +1,50 @@
 package com.example.nolurson;
 
 public class Rechtsfall {
-    private String Anwalt;
-    private String RechtsfallArten;
+    private String PersonalID;
+    private String TerminDatum;
     private String DateinNummer;
+    private String BurgerId;
+    private String BurgerID;
 
-    public Rechtsfall(String anwalt, String rechtsfallArten, String dateinNummer) {
-        Anwalt = anwalt;
-        RechtsfallArten = rechtsfallArten;
-        DateinNummer = dateinNummer;
+    public Rechtsfall(String PersonalID, String TerminDatum, String DateinNummer, String BurgerId, String BurgerID) {
+        this.PersonalID = PersonalID;
+        this.TerminDatum = TerminDatum;
+        this.DateinNummer = DateinNummer;
+        this.BurgerId = BurgerId;
+        this.BurgerID = BurgerID;
     }
 
-    public String getAnwalt() {
-        return Anwalt;
+    public String getPersonalID() {
+        return PersonalID;
     }
 
-    public void setAnwalt(String anwalt) {
-        Anwalt = anwalt;
+    public void setPersonalID(String personalID) {
+        PersonalID = personalID;
     }
 
-    public String getRechtsfallArten() {
-        return RechtsfallArten;
+    public String getTerminDatum() {
+        return TerminDatum;
     }
 
-    public void setRechtsfallArten(String rechtsfallArten) {
-        RechtsfallArten = rechtsfallArten;
+    public void setTerminDatum(String terminDatum) {
+        TerminDatum = terminDatum;
+    }
+
+    public String getBurgerId() {
+        return BurgerId;
+    }
+
+    public void setBurgerId(String BurgerId) {
+        BurgerId = BurgerId;
+    }
+
+    public String getBurgerID() {
+        return BurgerID;
+    }
+
+    public void setBurgerID(String burgerID) {
+        BurgerID = burgerID;
     }
 
     public String getDateinNummer() {
@@ -36,7 +56,7 @@ public class Rechtsfall {
     }
     @Override
     public String toString(){
-        return Anwalt+" "+RechtsfallArten+" "+DateinNummer;
+        return PersonalID+" "+TerminDatum+" "+DateinNummer+ " "+BurgerID+" "+BurgerId;
     }
 
 }

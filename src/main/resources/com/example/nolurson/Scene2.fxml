@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.Scene2Controller">
    <left>
       <AnchorPane prefHeight="566.0" prefWidth="385.0" style="-fx-background-color: #8B0000;" BorderPane.alignment="CENTER">
@@ -38,7 +37,7 @@
    <right>
       <AnchorPane prefHeight="566.0" prefWidth="647.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="klientButton" layoutX="87.0" layoutY="187.0" mnemonicParsing="false" onAction="#klientThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="KUNDENVERFAHREN" textFill="WHITE">
+            <Button fx:id="klientButton" layoutX="87.0" layoutY="251.0" mnemonicParsing="false" onAction="#klientThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="KUNDENVERFAHREN" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="36.0" />
                </font>
@@ -48,7 +47,12 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="userButton" layoutX="85.0" layoutY="283.0" mnemonicParsing="false" onAction="#userThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="BENUTZERVERFAHREN" textFill="WHITE">
+            <Button fx:id="userButton" layoutX="87.0" layoutY="356.0" mnemonicParsing="false" onAction="#userThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="BENUTZERVERFAHREN" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
+               </font>
+            </Button>
+            <Button fx:id="rechtbutton" layoutX="87.0" layoutY="147.0" mnemonicParsing="false" onAction="#rechtThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="RECHTSFALLTERMINEN" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="36.0" />
                </font>

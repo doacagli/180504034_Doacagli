@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -44,10 +41,7 @@ public class KlientController implements Initializable{
 
     @FXML
     private Button addButton;
-    /*@FXML
-    private AnchorPane anPane;
-    @FXML
-    private VBox ksc;*/
+
     @FXML
     private TableView<Klient> table_klient;
 
@@ -86,15 +80,27 @@ public class KlientController implements Initializable{
 
     @FXML
     private TextField txt_nname;
+    @FXML
+    private ChoiceBox<String> myChoiceBox;
 
-    //public static KlientController klc;
+    @FXML
+    private TextField txt_tel;
 
-    ObservableList<Klient> listKlient;
-    int index = -1;
-    Connection con = null;
-    ResultSet rs = null;
-    PreparedStatement pst = null;
+    @FXML
+    private TextField txt_adresse;
 
+    @FXML
+    private TextField txt_mail;
+
+    @FXML
+    private TextField txt_dateinnummer;
+    @FXML
+    private Label errorMessage;
+
+    @FXML
+    private DatePicker DateBox;
+
+    private String [] Geschlecht ={"W","M","D"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,6 +115,7 @@ public class KlientController implements Initializable{
         col_dateinnm.setCellValueFactory(new PropertyValueFactory<Klient, String>("DateinNummer"));
 
         table_klient.setItems(List());
+        myChoiceBox.getItems().addAll(Geschlecht);
     }
 
     @FXML
@@ -129,7 +136,22 @@ public class KlientController implements Initializable{
         System.out.println("you successfully loggod out");
         stage.close();
     }
+    public void deleteKlient(ActionEvent event) throws IOException {
+        Database.deleteKlient(txt_id.getText());
+
+    }
+    public void addKlient(ActionEvent event){
+        Boolean b = Database.addKlient(txt_id.getText(),txt_name.getText(),txt_nname.getText(),txt_adresse.getText(),txt_tel.getText(),DateBox.getValue().toString(),txt_mail.getText(),myChoiceBox.getValue(),txt_dateinnummer.getText());
+
+        if(b){
+            errorMessage.setText("Einfuegen erfolgreich!");
+        }else{
+            errorMessage.setText("Die Personal ist schon auf dem System befunden.");
+        }
+    }
+
+
+    }
 
 
 
-}

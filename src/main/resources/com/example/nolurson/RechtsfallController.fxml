@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nolurson.RechtsfallController">
+   <left>
+      <AnchorPane prefHeight="566.0" prefWidth="385.0" style="-fx-background-color: #8B0000;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="124.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@adalet-logo-551A396F76-seeklogo.com.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="566.0" prefWidth="920.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tab_recht" layoutX="372.0" layoutY="87.0" prefHeight="465.0" prefWidth="534.0">
+              <columns>
+                <TableColumn fx:id="col_datein" prefWidth="115.0" text="Dateinnummer" />
+                <TableColumn fx:id="col_bid" prefWidth="82.0" text="Burger ID" />
+                  <TableColumn fx:id="col_pid" prefWidth="104.0" text="Personal ID" />
+                  <TableColumn fx:id="col_terdat" prefWidth="109.0" text="Termindatum" />
+                  <TableColumn fx:id="col_falls" prefWidth="121.0" text="Fallsbetreffende" />
+              </columns>
+            </TableView>
+            <ButtonBar layoutX="584.0" layoutY="14.0" prefHeight="31.0" prefWidth="322.0">
+               <buttons>
+                  <Button fx:id="backToButton" minWidth="11.0" mnemonicParsing="false" onAction="#backTo" prefHeight="0.0" style="-fx-background-color: #8B0000;" text="←" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="logoutButton" layoutX="584.0" layoutY="14.0" minWidth="27.0" mnemonicParsing="false" onAction="#logOut" prefHeight="39.0" style="-fx-background-color: #8B0000;" text="X" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </buttons>
+            </ButtonBar>
+            <DatePicker fx:id="date_rechts" layoutX="69.0" layoutY="236.0" />
+            <TextField fx:id="txt_dateinn" layoutX="85.0" layoutY="283.0" promptText="Dateinnummer" />
+            <TextField fx:id="txt_bid" layoutX="85.0" layoutY="326.0" promptText="Burger ID" />
+            <TextField fx:id="txt_pid" layoutX="85.0" layoutY="368.0" promptText="Personal ID" />
+            <Button fx:id="deleteButton" layoutX="54.0" layoutY="480.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Loeschen" />
+            <Button fx:id="addButton" layoutX="216.0" layoutY="480.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Eınfuegen" />
+            <TextField fx:id="txt_fal" layoutX="85.0" layoutY="411.0" promptText="Fallsbetreffende" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
