@@ -16,7 +16,7 @@ public class Benutzer extends Person{
         this.Arbeitsstelle=aStelle;
 
     }
-    public Benutzer(String Benutzername, String PersonalID, String Arbeitsstelle, String Passwort, String BurgerID) {
+    public Benutzer(String Benutzername, String Passwort, String PersonalID, String Arbeitsstelle, String BurgerID) {
         super(BurgerID);
        this.Benutzername = Benutzername;
        this.PersonalID = PersonalID;

@@ -71,6 +71,8 @@ public class AdminController implements Initializable {
     private String [] Geschlecht ={"W","M","D"};
     @FXML
     private Label errormess;
+    @FXML
+    private Label txt_message;
 
     @FXML
     private TextField txt_bid;
@@ -103,7 +105,7 @@ public class AdminController implements Initializable {
 
     @FXML
     private Button but_update;
-    private String [] Updatebar ={"PersonalID","Benutzername","Passwort","Geschlecht","Vorname","Nachname","Adresse", "Geburtsdatum","Mail","Admin","BurgerID","Telefonnummer"};
+    private String [] Updatebar ={"PersonalID","Benutzername","Passwort","Arbeitsstelle"};
 
     ObservableList<Benutzer> Benutzerlist = FXCollections.observableArrayList();
     //Benutzerlist = ListBenutzer();
@@ -117,19 +119,18 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resource) {
 
-            BenutzernameID.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("Benutzername"));
-            PersonalIDID.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("PersonalID"));
-            col_passwort.setCellValueFactory(new PropertyValueFactory<Benutzer, String >("Passwort"));
-            col_arbeit.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("Arbeitsstelle"));
-            txt_bidd.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("BurgerID"));
-
-            BenutzerTableView.setItems(ListBenutzer());
-            adminbox.getItems().addAll(Arbeitsstelle);
-            myChoiceBox.getItems().addAll(Geschlecht);
+        BenutzernameID.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("Benutzername"));
+        col_passwort.setCellValueFactory(new PropertyValueFactory<Benutzer, String >("Passwort"));
+        PersonalIDID.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("PersonalID"));
+        col_arbeit.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("Arbeitsstelle"));
+        txt_bidd.setCellValueFactory(new PropertyValueFactory<Benutzer, String>("BurgerID"));
+        BenutzerTableView.setItems(ListBenutzer());
+        adminbox.getItems().addAll(Arbeitsstelle);
+        myChoiceBox.getItems().addAll(Geschlecht);
+        updatebox.getItems().addAll(Updatebar);
 
 
     }
-
 
     public void backTo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
@@ -154,7 +155,7 @@ public class AdminController implements Initializable {
         stage.close();
     }
     public void addBenutzer(ActionEvent event){
-        Boolean b = Database.addBenutzer(txt_bid.getText(),txt_vn.getText(),txt_nn.getText(),txt_adresse.getText(),txt_tel.getText(),DateBox.getValue().toString(),txt_mail.getText(),myChoiceBox.getValue(),txt_pid.getText(),txt_bn.getText(),txt_pss.getText(),adminbox.getValue());
+        Boolean b = Database.addBenutzer(txt_vn.getText(),txt_nn.getText(),txt_bid.getText(),txt_adresse.getText(),DateBox.getValue().toString(),txt_tel.getText(),myChoiceBox.getValue(),txt_mail.getText(),txt_bn.getText(),txt_pss.getText(),txt_pid.getText(),adminbox.getValue());
 
         if(b){
             errormess.setText("Einfuegen erfolgreich!");
@@ -162,13 +163,25 @@ public class AdminController implements Initializable {
             errormess.setText("Die Personal ist schon auf dem System befunden.");
         }
     }
-    public void UpdateSeite(ActionEvent event) throws IOException{
-        FXMLLoader bb = new FXMLLoader(getClass().getResource("AdminUpdateController.fxml"));
-        root = bb.load();
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+    public void updateWerten(ActionEvent event){
+        if (updatebox.getValue()== "Benutzername"){
+            Database.updateBenutzername(txt_bid.getText(),txt_bn.getText());
+            errormess.setText("Einfuegen erfolgreich!");
+        }else if(updatebox.getValue() == "Passwort") {
+            Database.updatePasswort(txt_bid.getText(), txt_pss.getText());
+            errormess.setText("Einfuegen erfolgreich!");
+        }else if(updatebox.getValue() == "Arbeitsstelle"){
+            Database.updateArbeitsstelle(txt_bid.getText(), adminbox.getValue());
+            errormess.setText("Einfuegen erfolgreich!");
+        }else if(updatebox.getValue() == "PersonalID") {
+            Database.updatePersonalID(txt_bid.getText(), txt_pid.getText());
+            errormess.setText("Einfuegen erfolgreich!");
+        }
+        else{
+            System.out.println("False");
+        }
+
     }
 
 

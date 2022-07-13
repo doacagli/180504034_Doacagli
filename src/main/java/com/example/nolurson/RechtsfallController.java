@@ -79,6 +79,7 @@ public class RechtsfallController {
         col_terdat.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String>("TerminDatum"));
         col_falls.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String >("BurgerId"));
 
+
         tab_recht.setItems(List());
 
     }

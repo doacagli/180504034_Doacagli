@@ -76,11 +76,11 @@ public class Database {
 
         try{
             stmt = conn.createStatement();
-            ResultSet res= stmt.executeQuery("SELECT Benutzername, PersonalID, Arbeitsstelle, Passwort, BurgerID FROM Benutzer");
+            ResultSet res= stmt.executeQuery("SELECT Benutzername, Passwort, PersonalID, Arbeitsstelle, BurgerID FROM Benutzer");
             while (res.next()){
                 String s = res.getString("Benutzername");
-                String s1 = res.getString("PersonalID");
-                String s2 = res.getString("Passwort");
+                String s1 = res.getString("Passwort");
+                String s2 = res.getString("PersonalID");
                 String s3 = res.getString("Arbeitsstelle");
                 String s4 = res.getString("BurgerID");
                 //System.out.println(s + s1);
@@ -150,6 +150,31 @@ public class Database {
             e.printStackTrace();
         }
     }
+    public static void updatePasswort(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Benutzer SET PAsswort = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateArbeitsstelle(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Benutzer SET Arbeitsstelle = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updatePersonalID(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Benutzer SET PersonalID = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //control admin
     public static Boolean containAdmin(String Benutzername){
@@ -224,12 +249,12 @@ public class Database {
         }
         return false;
     }
-
-    public static Boolean addBenutzer(String BurgerID, String vorn, String nachn, String  add, String tel, String gbd, String ma, String ges, String pid, String bn, String ps, String as){
+    //String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String  telefonnummer, String geschlecht, String mailAdresse,  String bname, String pswort,String personalID, String aStelle
+    public static Boolean addBenutzer( String vorn, String nachn,String BurgerID, String  add, String gbd, String tel, String ges, String ma, String bn, String ps,String pid,String as){
         if(!Database.containBenutzer(bn,ps)){
 
-            String s1 = "INSERT INTO Person (BurgerID,Vorname,Nachname,Adresse,Telefonnummer, Geburtsdatum, MailAdresse, Geschlecht) VALUES('"+BurgerID+"','"+vorn+"','"+nachn+"','" + add + "','"+tel+"','"+gbd+"','" + ma +"','"+ges+"');";
-            String s2 = "INSERT INTO Benutzer (PersonalID,Benutzername,Passwort,Arbeitsstelle,BurgerID) VALUES('"+pid+"','"+bn+"','"+as+"','"+ps+"','"+BurgerID+"');";
+            String s1 = "INSERT INTO Person (Vorname,Nachname,BurgerID,Adresse,Geburtsdatum,Telefonnummer,Geschlecht,MailAdresse) VALUES('"+vorn+"','"+nachn+"','"+BurgerID+"','" + add + "','"+gbd+"','"+tel+"','" + ges +"','"+ma+"');";
+            String s2 = "INSERT INTO Benutzer (Benutzername,Passwort,PersonalID,Arbeitsstelle,BurgerID) VALUES('"+bn+"','"+ps+"','"+pid+"','"+as+"','"+BurgerID+"');";
 
 
             try {

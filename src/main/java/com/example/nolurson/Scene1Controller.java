@@ -49,15 +49,28 @@ public class Scene1Controller {
 
         }else{
             if(Database.findUser(username, password)){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
-                root = loader.load();
-                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                Scene2Controller scene2Controller =loader.getController();
-                scene2Controller.displayName(username);
+                if(Database.containAdmin(username)){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
+                    root = loader.load();
+                    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    Scene2Controller scene2Controller =loader.getController();
+                    scene2Controller.displayName(username);
+                    stage.setScene(scene);
+                    stage.show();
+                }else{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2UserController.fxml"));
+                    root = loader.load();
+                    stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    Scene2UserController scene2UserController =loader.getController();
+                    scene2UserController.displayName(username);
+                    stage.setScene(scene);
+                    stage.show();
 
-                stage.setScene(scene);
-                stage.show();
+                }
+
+
             }else{
                 messageLabel.setText("Falsche Benutzername oder Passwort!");
             }
