@@ -2,13 +2,7 @@ package com.example.nolurson;
 import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Set;
+import javafx.fxml.FXML;
 
 
 public class Database {
@@ -22,15 +16,8 @@ public class Database {
             String url = "jdbc:sqlite:C:\\Users\\e1805\\IdeaProjects\\demo1\\nolurson\\src\\main\\java\\com\\example\\nolurson\\anwaltdb.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-
             System.out.println("Connection to SQLite has been established.");
             stmt = conn.createStatement();
-            //stm.executeUpdate("INSERT INTO Person (NAME,LASTNAME,ID,AGE) VALUES('Doa','Cagli','123456789',22)");
-            //stm.executeUpdate("INSERT INTO PERSONAL(USERNAME, PASSWORD) VALUES('Doacagli','123456')");
-//            ResultSet res = stmt.executeQuery("SELECT * FROM Person");
-//            if (res.next()) {
-//                System.out.println("username: " + res.getString("NAME"));
-//            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -55,6 +42,24 @@ public class Database {
         }
         return false;
     }
+    public static boolean containUser(String benutzername, String BurgerID){
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT Benutzername , BurgerID FROM Benutzer");
+            while (res.next()){
+                String s1 = res.getString("Benutzername");
+                String s2 = res.getString("BurgerID");
+                if(s1.equals(benutzername) && s2.equals(BurgerID)){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public static boolean findAdmin(String Arbeitsstelle){
         try{
             Statement stmt = conn.createStatement();
@@ -92,6 +97,67 @@ public class Database {
         }
         return arr;
     }
+    public static ObservableList listBenutzer1(String BurgerID) {
+        ObservableList<Person> arr = FXCollections.observableArrayList();
+
+        try{
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Vorname, Nachname, BurgerID, Adresse, Geschlecht FROM Person WHERE BurgerID="+BurgerID);
+            //System.out.println(BurgerID);
+            while (res.next()){
+                String s = res.getString("Vorname");
+                String s1 = res.getString("Nachname");
+                String s2 = res.getString("BurgerID");
+                String s3 = res.getString("Adresse");
+                String s7 = res.getString("Geschlecht");
+                //System.out.println(s + s1);
+
+                arr.add(new Person(s,s1,s2,s3,s7));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return arr;
+    }
+    public static ObservableList listBenutzer2(String BurgerID) {
+        ObservableList<Person> arr = FXCollections.observableArrayList();
+
+        try{
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Telefonnummer, Geburtsdatum, MailAdresse FROM Person WHERE Person.BurgerID = '" + BurgerID +"'");
+            while (res.next()){
+                String s4 = res.getString("Telefonnummer");
+                String s5 = res.getString("Geburtsdatum");
+                String s6 = res.getString("Mailadresse");
+
+                //System.out.println(s + s1);
+
+                arr.add(new Person(s4,s5,s6));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return arr;
+    }
+    public static ObservableList listBenutzer3(String BurgerID) {
+        ObservableList<Benutzer> arr = FXCollections.observableArrayList();
+
+        try{
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Benutzername, Passwort FROM Benutzer WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+            while (res.next()){
+                String s4 = res.getString("Benutzername");
+                String s5 = res.getString("Passwort");
+                //System.out.println(s + s1);
+
+                arr.add(new Benutzer(s4,s5));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return arr;
+    }
+
     public static void deleteBenutzer(String BurgerID){
         try {
             //System.out.println("DELETE FROM Benutzer WHERE Benutzer.PersonalID="+BurgerID);
@@ -108,7 +174,8 @@ public class Database {
 
         try{
             stmt = conn.createStatement();
-            ResultSet res= stmt.executeQuery("SELECT Klient.DateinNummer, Klient.BurgerID, Person.Vorname, Person.Nachname, Person.BurgerID, Person.Adresse, Person.Telefonnummer, Person.Geburtsdatum, Person.MailAdresse, Person.Geschlecht FROM Person, Klient WHERE Person.BurgerID == Klient.BurgerID");
+            ResultSet res= stmt.executeQuery("SELECT Person.Vorname, Person.Nachname, Person.BurgerID, Person.Adresse, Person.Telefonnummer, Person.Geburtsdatum, Person.Geschlecht, Person.MailAdresse, Klient.DateinNummer, Klient.BurgerID FROM Person, Klient WHERE Person.BurgerID == Klient.BurgerID");
+
             while (res.next()){
                 String s = res.getString("Vorname");
                 String s1 = res.getString("Nachname");
@@ -121,7 +188,7 @@ public class Database {
                 String s8 = res.getString("DateinNummer");
                 System.out.println(s + s1);
 
-                arr.add(new Klient(s,s1,s2,s3,s4,s5,s6,s7,s8));
+                arr.add(new Klient(s,s1,s2,s3,s5,s4,s6,s7,s8));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -135,6 +202,17 @@ public class Database {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM Klient WHERE Klient.BurgerID="+BurgerID);
             stmt.executeUpdate("DELETE FROM Person WHERE Person.BurgerID="+BurgerID);
+        }catch (Exception E){
+            System.out.println(E);
+        }
+    }
+    public static void deleteRechtsfall(String DateinNummer){
+
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE FROM Klient WHERE Klient.DateinNummer="+DateinNummer);
+            stmt.executeUpdate("DELETE FROM Fallsbetreffende WHERE Fallsbetreffende.DateinNummer="+DateinNummer);
+            stmt.executeUpdate("DELETE FROM Rechtsfall WHERE Rechtsfall.DateinNummer="+DateinNummer);
         }catch (Exception E){
             System.out.println(E);
         }
@@ -170,6 +248,62 @@ public class Database {
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE Benutzer SET PersonalID = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserBenutzername(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Benutzer SET Benutzername = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserPasswort(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Benutzer SET Passwort = '" + Value + "' WHERE Benutzer.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserVorname(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Vorname = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserNachname(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Nachname = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserAdresse(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Adresse = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserTel(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Telefonnummer = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateUserMailAdresse(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET MailAdresse = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -215,9 +349,7 @@ public class Database {
         if(!Database.containKlient(BurgerID)){
             //System.out.println(GDatum);
             String s1 = "INSERT INTO Person (BurgerID,Vorname,Nachname,Adresse,Telefonnummer, Geburtsdatum, MailAdresse, Geschlecht) VALUES('"+BurgerID+"','"+n+"','"+nn+"','" + gbd + "','"+ma+"','"+add+"','"+tel+"','"+gs+"');";
-            String s2 = "INSERT INTO Klient (BurgerID, DateinNummer) VALUES('"+BurgerID+"','"+gs+"');";
-        /*System.out.println(s1);
-        System.out.println(s2);*/
+            String s2 = "INSERT INTO Klient (BurgerID, DateinNummer) VALUES('"+BurgerID+"','"+dn+"');";
 
             try {
                 stmt.executeUpdate(s1);
@@ -231,6 +363,41 @@ public class Database {
 
         }
 
+    }
+    public static Boolean addRechtsfall(String PID, String RA,String DN, String BID, String FB, String TD){
+        if(!Database.containRechtsfall(DN)){
+            String s1 = "INSERT INTO Rechtsfall (PersonalID, RechtsfallArten, DateinNummer, BurgerID, Fallsbetreffende, TerminDatum) VALUES('"+PID+"','"+RA+"','"+DN+"','"+BID+"','"+FB+"','"+TD+"');";
+            String s2 = "INSERT INTO Fallsbetreffende(Fallsbetreffende, DateinNummer) VALUES('"+FB+"','"+DN+"');";
+            String s3 = "INSERT INTO Klient(BurgerID, DateinNummer) VALUES('"+BID+"','"+DN+"');";
+            try {
+                stmt.executeUpdate(s1);
+                stmt.executeUpdate(s2);
+                stmt.executeUpdate(s3);
+            }catch (Exception e){
+                System.out.println(e);
+            }
+            return true;
+        }else{
+            return false;
+
+        }
+
+    }
+
+    public static boolean containRechtsfall(String DateinNummer) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT DateinNummer FROM Rechtsfall");
+            while (res.next()){
+                String s1 = res.getString("BurgerID");
+                if(s1.equals(DateinNummer)){
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
     }
     public static Boolean containBenutzer(String Benutzername, String passwort){
         try {
@@ -249,7 +416,6 @@ public class Database {
         }
         return false;
     }
-    //String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String  telefonnummer, String geschlecht, String mailAdresse,  String bname, String pswort,String personalID, String aStelle
     public static Boolean addBenutzer( String vorn, String nachn,String BurgerID, String  add, String gbd, String tel, String ges, String ma, String bn, String ps,String pid,String as){
         if(!Database.containBenutzer(bn,ps)){
 
@@ -274,22 +440,89 @@ public class Database {
         ObservableList<Rechtsfall> arr = FXCollections.observableArrayList();
 
         try{
-            stmt = conn.createStatement();
-            ResultSet res= stmt.executeQuery("SELECT Rechtsfall.DateinNummer, Rechtsfall.TerminDatum, Rechtsfall.PersonalID, Rechtsfall.BurgerID, Fallsbetreffende.BurgerId, Fallsbetreffende.DateinNummer FROM Rechtsfall, Klient, Fallsbetreffende WHERE (Rechtsfall.DateinNummer == Fallsbetreffende.DateinNummer)");
-            while (res.next()){
-                String s = res.getString("PersonalID");
-                String s1 = res.getString("TerminDatum");
-                String s2 = res.getString("DateinNummer");
-                String s3 = res.getString("BurgerId");
-                String s4 = res.getString("BurgerID");
 
-                arr.add(new Rechtsfall(s,s1,s2,s3,s4));
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Rechtsfall.PersonalID, Rechtsfall.RechtsfallArten, Rechtsfall.DateinNummer, Rechtsfall.BurgerID, Rechtsfall.Fallsbetreffende, Rechtsfall.TerminDatum, Fallsbetreffende.DateinNummer, Klient.DateinNummer FROM Rechtsfall, Fallsbetreffende, Klient WHERE Rechtsfall.DateinNummer = Fallsbetreffende.DateinNummer AND Rechtsfall.DateinNummer = Klient.DateinNummer");
+            while (res.next()){
+                String a = res.getString("PersonalID");
+                String a5 = res.getString("RechtsfallArten");
+                String a1 = res.getString("DateinNummer");
+                String a2 = res.getString("BurgerID");
+                String a3 = res.getString("Fallsbetreffende");
+                String a4 = res.getString("TerminDatum");
+                arr.add(new Rechtsfall(a,a5,a1,a2,a3,a4));
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         return arr;
     }
+    public static void updateKlientVorname(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Vorname = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateRechtsfallTerminDatum(String DateinNummer, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE RechtsfallArten SET TerminDatum = '" + Value + "' WHERE Rechtsfall.DateinNummer = '" + DateinNummer +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateKlientNachname(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Nachname = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateKlientMail(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET MailAdresse = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateKlientAdresse(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Adresse = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateKlientTelefonnummer(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Telefonnummer = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateKlientGeburtsdatum(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Geburtsdatum = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateKlientDateinNummer(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Klient SET DateinNummer = '" + Value + "' WHERE Klient.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

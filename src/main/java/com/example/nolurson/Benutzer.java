@@ -23,6 +23,10 @@ public class Benutzer extends Person{
        this.Passwort = Passwort;
        this.Arbeitsstelle = Arbeitsstelle;
     }
+    public Benutzer(String Benutzername, String Passwort){
+        this.Benutzername=Benutzername;
+        this.Passwort = Passwort;
+    }
 
     public String getPersonalID() {
         return PersonalID;

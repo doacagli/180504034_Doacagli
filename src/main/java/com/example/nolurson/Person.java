@@ -20,6 +20,18 @@ public class Person {
     public Person() {
 
     }
+    public Person (String Vorname, String Nachname, String BurgerID, String Adresse, String Geschlecht){
+        this.Vorname = Vorname;
+        this.Nachname= Nachname;
+        this.BurgerID = BurgerID;
+        this.Adresse = Adresse;
+        this.Geschlecht = Geschlecht;
+    }
+    public Person(String Telefonnummer, String Geburtsdatum, String MailAdresse){
+        this.Telefonnummer = Telefonnummer;
+        this.Geburtsdatum = Geburtsdatum;
+        this.MailAdresse = MailAdresse;
+    }
 
     public String getVorname() {
         return Vorname;

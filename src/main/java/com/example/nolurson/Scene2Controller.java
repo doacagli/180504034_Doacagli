@@ -26,10 +26,10 @@ public class Scene2Controller {
     private Button logout;
 
 
-
     public void displayName(String username){
 
         nameLabel.setText("Willkommen " + username);
+
     }
     public void userThing(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminController.fxml"));
@@ -40,7 +40,7 @@ public class Scene2Controller {
         stage.show();
     }
     public void klientThing(ActionEvent event) throws IOException{
-        FXMLLoader aa = new FXMLLoader(getClass().getResource("KlientController.fxml"));
+        FXMLLoader aa = new FXMLLoader(getClass().getResource("KlientAdminController.fxml"));
         root = aa.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

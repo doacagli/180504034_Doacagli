@@ -37,12 +37,6 @@ public class KlientController implements Initializable{
     private Button backToButton;
 
     @FXML
-    private Button deleteButton;
-
-    @FXML
-    private Button addButton;
-
-    @FXML
     private TableView<Klient> table_klient;
 
     @FXML
@@ -73,34 +67,9 @@ public class KlientController implements Initializable{
     private TableColumn<Klient, String> col_dateinnm;
 
     @FXML
-    private TextField txt_id;
-
-    @FXML
-    private TextField txt_name;
-
-    @FXML
-    private TextField txt_nname;
-    @FXML
-    private ChoiceBox<String> myChoiceBox;
-
-    @FXML
-    private TextField txt_tel;
-
-    @FXML
-    private TextField txt_adresse;
-
-    @FXML
-    private TextField txt_mail;
-
-    @FXML
-    private TextField txt_dateinnummer;
-    @FXML
     private Label errorMessage;
 
-    @FXML
-    private DatePicker DateBox;
-
-    private String [] Geschlecht ={"W","M","D"};
+    private String[] Geschlecht ={"W","M","D"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,7 +84,7 @@ public class KlientController implements Initializable{
         col_dateinnm.setCellValueFactory(new PropertyValueFactory<Klient, String>("DateinNummer"));
 
         table_klient.setItems(List());
-        myChoiceBox.getItems().addAll(Geschlecht);
+
     }
 
     @FXML
@@ -125,7 +94,7 @@ public class KlientController implements Initializable{
         return arr;
     }
     public void backTo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Scene2UserController.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -136,22 +105,8 @@ public class KlientController implements Initializable{
         System.out.println("you successfully loggod out");
         stage.close();
     }
-    public void deleteKlient(ActionEvent event) throws IOException {
-        Database.deleteKlient(txt_id.getText());
 
-    }
-    public void addKlient(ActionEvent event){
-        Boolean b = Database.addKlient(txt_id.getText(),txt_name.getText(),txt_nname.getText(),txt_adresse.getText(),txt_tel.getText(),DateBox.getValue().toString(),txt_mail.getText(),myChoiceBox.getValue(),txt_dateinnummer.getText());
-
-        if(b){
-            errorMessage.setText("Einfuegen erfolgreich!");
-        }else{
-            errorMessage.setText("Die Personal ist schon auf dem System befunden.");
-        }
-    }
-
-
-    }
+}
 
 
 

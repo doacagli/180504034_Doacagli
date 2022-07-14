@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RechtsfallController {
+public class RechtsfallController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -36,6 +37,8 @@ public class RechtsfallController {
 
     @FXML
     private TextField txt_pid;
+    @FXML
+    private TextField txt_fal;
 
     @FXML
     private Button addButton;
@@ -58,6 +61,17 @@ public class RechtsfallController {
     private TableColumn<Rechtsfall, String> col_terdat;
     @FXML
     private TableColumn<Rechtsfall, String> col_falls;
+    @FXML
+    private TableColumn<Rechtsfall, String> col_fal;
+    @FXML
+    private ChoiceBox<String> myChoicebox;
+    @FXML
+    private ChoiceBox<String> updateBar;
+    @FXML
+    private Label errorMessage;
+
+    private String [] Rechtsfall={"Scheidung", "Erbschafts"};
+    private String [] UpdateBar={"PersonalID","RechtsfallArten","BurgerID","Fallsbetreffende", "TerminDatum"};
 
 
     public void backTo(ActionEvent event) throws IOException {
@@ -73,22 +87,40 @@ public class RechtsfallController {
         stage.close();
     }
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        col_pid.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String >("PersonalID"));
+        col_fal.setCellValueFactory(new PropertyValueFactory<Rechtsfall, String >("RechtsfallArten"));
         col_datein.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String>("DateinNummer"));
         col_bid.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String >("BurgerID"));
-        col_pid.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String >("PersonalID"));
+        col_falls.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String >("Fallsbetreffende"));
         col_terdat.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String>("TerminDatum"));
-        col_falls.setCellValueFactory(new PropertyValueFactory<Rechtsfall,String >("BurgerId"));
-
-
         tab_recht.setItems(List());
+        myChoicebox.getItems().addAll(Rechtsfall);
+        updateBar.getItems().addAll(UpdateBar);
 
     }
     @FXML
     public ObservableList List(){
         ObservableList arr = Database.listRechtsfall();
-
         return arr;
     }
+    public void deleteRechtsfall(ActionEvent event) throws IOException {
+        Database.deleteRechtsfall(txt_dateinn.getText());
 
+    }
+    public void addRechtsfall(ActionEvent event){
+        Boolean b = Database.addRechtsfall(txt_pid.getText(),myChoicebox.getValue(),txt_dateinn.getText(),txt_bid.getText(),txt_fal.getText(),date_rechts.getValue().toString());
+
+        if(b){
+            errorMessage.setText("Einfuegen erfolgreich!");
+        }else{
+            errorMessage.setText("Die Personal ist schon auf dem System befunden.");
+        }
+    }
+
+    public void updateWerten(ActionEvent event){
+            Database.updateRechtsfallTerminDatum(txt_dateinn.getText(),date_rechts.getValue().toString());
+            errorMessage.setText("Einfuegen erfolgreich!");
+
+    }
 
 }

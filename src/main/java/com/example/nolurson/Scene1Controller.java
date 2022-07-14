@@ -65,6 +65,7 @@ public class Scene1Controller {
                     scene = new Scene(root);
                     Scene2UserController scene2UserController =loader.getController();
                     scene2UserController.displayName(username);
+                    //scene2UserController.popUp(ActionEvent,username);
                     stage.setScene(scene);
                     stage.show();
 

@@ -7,17 +7,15 @@ import java.util.List;
 public class Klient extends Person{
     private String DateinNummer;
 
-    public Klient(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse, List<Rechtsfall> rechtsfall) {
-        super(vorname, nachname, BurgerId, adresse, geburtsdatum, telefonnummer, geschlecht, mailAdresse);
-    }
-
-    public Klient(String burgerId, String vorname, String nachname, String geburtsdatum, String adresse, String telefonnummer, String geschlecht, String email, String DateinNummer) {
-        super(burgerId, vorname, nachname, geburtsdatum,adresse, telefonnummer, geschlecht, email);
+    public Klient(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum,String telefonnummer,  String geschlecht, String mailAdresse, String DateinNummer) {
+        super(vorname, nachname, BurgerId, adresse,geburtsdatum,telefonnummer, geschlecht, mailAdresse);
         this.DateinNummer=DateinNummer;
+
     }
 
-    public Klient() {
 
+    public Klient(String BurgerID) {
+        super(BurgerID);
     }
 
     public String getDateinNummer() {
