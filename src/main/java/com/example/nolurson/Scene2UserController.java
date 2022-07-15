@@ -42,7 +42,7 @@ public class Scene2UserController {
         stage.show();
     }
     public void rechtThing(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RechtsfallController.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RechtsfallUserController.fxml"));
         Parent bb = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(bb);
@@ -56,8 +56,16 @@ public class Scene2UserController {
         root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        BenutzerUserController benutzerUserController = loader.getController();
-        benutzerUserController.getUsername(c);
+        //BenutzerUserController benutzerUserController = loader.getController();
+        //DDoabenutzerUserController.getUsername(c);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void fallThing(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FallUser.fxml"));
+        Parent bb = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(bb);
         stage.setScene(scene);
         stage.show();
     }

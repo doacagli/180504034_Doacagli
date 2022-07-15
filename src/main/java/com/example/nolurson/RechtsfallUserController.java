@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RechtsfallController implements Initializable {
+public class RechtsfallUserController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -76,7 +76,7 @@ public class RechtsfallController implements Initializable {
 
 
     public void backTo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Scene2UserController.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -120,8 +120,8 @@ public class RechtsfallController implements Initializable {
     }
 
     public void updateWerten(ActionEvent event){
-            Database.updateRechtsfallTerminDatum(txt_dateinn.getText(),date_rechts.getValue().toString());
-            errorMessage.setText("Einfuegen erfolgreich!");
+        Database.updateRechtsfallTerminDatum(txt_dateinn.getText(),date_rechts.getValue().toString());
+        errorMessage.setText("Einfuegen erfolgreich!");
 
     }
 

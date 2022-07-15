@@ -2,6 +2,7 @@ package com.example.nolurson;
 import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 
 
@@ -195,12 +196,49 @@ public class Database {
         }
         return arr;
     }
+    public static ObservableList<Fallsbetreffende> listFallsbetreffende() {
+        ObservableList<Fallsbetreffende> arr = FXCollections.observableArrayList();
+
+        try{
+            stmt = conn.createStatement();
+            ResultSet res= stmt.executeQuery("SELECT Person.Vorname, Person.Nachname, Person.BurgerID, Person.Adresse, Person.Telefonnummer, Person.Geburtsdatum, Person.Geschlecht, Person.MailAdresse, Fallsbetreffende.DateinNummer, Fallsbetreffende.BurgerId FROM Person, Fallsbetreffende WHERE Person.BurgerID == Fallsbetreffende.BurgerId");
+
+            while (res.next()){
+                String s = res.getString("Vorname");
+                String s1 = res.getString("Nachname");
+                String s2 = res.getString("BurgerID");
+                String s3 = res.getString("Adresse");
+                String s4 = res.getString("Telefonnummer");
+                String s5 = res.getString("Geburtsdatum");
+                String s6 = res.getString("Geschlecht");
+                String s7 = res.getString("MailAdresse");
+                String s8 = res.getString("DateinNummer");
+                System.out.println(s + s1);
+
+                arr.add(new Fallsbetreffende(s,s1,s2,s3,s5,s4,s6,s7,s8));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return arr;
+    }
     //delete Klient
     public static void deleteKlient(String BurgerID){
 
         try{
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM Klient WHERE Klient.BurgerID="+BurgerID);
+            stmt.executeUpdate("DELETE FROM Person WHERE Person.BurgerID="+BurgerID);
+        }catch (Exception E){
+            System.out.println(E);
+        }
+    }
+
+    public static void deleteFallsbetreffende(String BurgerID){
+
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE FROM Fallsbetreffende WHERE Fallsbetreffende.BurgerId="+BurgerID);
             stmt.executeUpdate("DELETE FROM Person WHERE Person.BurgerID="+BurgerID);
         }catch (Exception E){
             System.out.println(E);
@@ -345,6 +383,22 @@ public class Database {
         return false;
     }
 
+    public static boolean containFallsbetreffende(String BurgerID) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet res = stmt.executeQuery("SELECT BurgerID FROM Person");
+            while (res.next()){
+                String s1 = res.getString("BurgerID");
+                if(s1.equals(BurgerID)){
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public static Boolean addKlient(String BurgerID, String n, String nn, String  gbd, String ma, String add, String tel, String gs, String dn){
         if(!Database.containKlient(BurgerID)){
             //System.out.println(GDatum);
@@ -364,10 +418,30 @@ public class Database {
         }
 
     }
+
+    public static Boolean addFallsbetreffende(String BurgerID, String n, String nn, String  gbd, String ma, String add, String tel, String gs, String dn){
+        if(!Database.containFallsbetreffende(BurgerID)){
+            //System.out.println(GDatum);
+            String s1 = "INSERT INTO Person (BurgerID,Vorname,Nachname,Adresse,Telefonnummer, Geburtsdatum, MailAdresse, Geschlecht) VALUES('"+BurgerID+"','"+n+"','"+nn+"','" + gbd + "','"+ma+"','"+add+"','"+tel+"','"+gs+"');";
+            String s2 = "INSERT INTO Fallsbetreffende (BurgerId, DateinNummer) VALUES('"+BurgerID+"','"+dn+"');";
+
+            try {
+                stmt.executeUpdate(s1);
+                stmt.executeUpdate(s2);
+            }catch (Exception e){
+                System.out.println(e);
+            }
+            return true;
+        }else{
+            return false;
+
+        }
+
+    }
     public static Boolean addRechtsfall(String PID, String RA,String DN, String BID, String FB, String TD){
         if(!Database.containRechtsfall(DN)){
             String s1 = "INSERT INTO Rechtsfall (PersonalID, RechtsfallArten, DateinNummer, BurgerID, Fallsbetreffende, TerminDatum) VALUES('"+PID+"','"+RA+"','"+DN+"','"+BID+"','"+FB+"','"+TD+"');";
-            String s2 = "INSERT INTO Fallsbetreffende(Fallsbetreffende, DateinNummer) VALUES('"+FB+"','"+DN+"');";
+            String s2 = "INSERT INTO Fallsbetreffende(BurgerId, DateinNummer) VALUES('"+FB+"','"+DN+"');";
             String s3 = "INSERT INTO Klient(BurgerID, DateinNummer) VALUES('"+BID+"','"+DN+"');";
             try {
                 stmt.executeUpdate(s1);
@@ -465,11 +539,68 @@ public class Database {
             e.printStackTrace();
         }
     }
+    public static void updateFbVorname(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Vorname = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateFbNachname(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Nachname = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateFbAdresse(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Adresse = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateFbTel(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Telefonnummer = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateFbGeburtsdatum(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET Geburtsdatum = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateFbMail(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Person SET MailAdresse = '" + Value + "' WHERE Person.BurgerID = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void updateFbDateinNummer(String BurgerID, String Value){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE Fallsbetreffende SET DateinNummer = '" + Value + "' WHERE Fallsbetreffende.BurgerId = '" + BurgerID +"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     public static void updateRechtsfallTerminDatum(String DateinNummer, String Value){
         try {
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE RechtsfallArten SET TerminDatum = '" + Value + "' WHERE Rechtsfall.DateinNummer = '" + DateinNummer +"'");
+            stmt.executeUpdate("UPDATE Rechtsfall SET TerminDatum = '" + Value + "' WHERE Rechtsfall.DateinNummer = '" + DateinNummer +"'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -521,6 +652,7 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 

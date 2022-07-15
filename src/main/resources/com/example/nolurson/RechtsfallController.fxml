@@ -58,7 +58,7 @@
             <TextField fx:id="txt_bid" layoutX="86.0" layoutY="298.0" promptText="Burger ID" />
             <TextField fx:id="txt_pid" layoutX="86.0" layoutY="336.0" promptText="Personal ID" />
             <Button fx:id="deleteButton" layoutX="30.0" layoutY="504.0" mnemonicParsing="false" onAction="#deleteRechtsfall" prefHeight="31.0" prefWidth="110.0" text="Loeschen" />
-            <Button fx:id="addButton" layoutX="218.0" layoutY="504.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Eınfuegen" />
+            <Button fx:id="addButton" layoutX="218.0" layoutY="504.0" mnemonicParsing="false" onAction="#addRechtsfall" prefHeight="31.0" prefWidth="110.0" text="Eınfuegen" />
             <TextField fx:id="txt_fal" layoutX="86.0" layoutY="374.0" promptText="Fallsbetreffende" />
             <ChoiceBox fx:id="myChoicebox" layoutX="86.0" layoutY="413.0" prefHeight="31.0" prefWidth="188.0" />
             <Label fx:id="errorMessage" layoutX="13.0" layoutY="23.0" prefHeight="27.0" prefWidth="0.0" textFill="WHITE">
@@ -66,8 +66,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="updateBar" layoutX="30.0" layoutY="458.0" prefWidth="150.0" />
-            <Button layoutX="216.0" layoutY="458.0" mnemonicParsing="false" text="Aktualisierung" />
+            <Button fx:id="but_update" layoutX="122.0" layoutY="462.0" mnemonicParsing="false" onAction="#updateWerten" text="Aktualisierung" />
+            <Label layoutX="372.0" layoutY="10.0" text="RECHTSFALL" textFill="DARKRED">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </right>

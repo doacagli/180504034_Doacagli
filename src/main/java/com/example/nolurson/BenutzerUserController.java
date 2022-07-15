@@ -41,19 +41,15 @@ public class BenutzerUserController implements Initializable{
 
     @FXML
     private Button but_update;
-    @FXML
-    private Label ttt;
 
-    @FXML
-    private Label tt;
+    @FXML Label errormess;
 
 
     private String [] Updatebar={"Vorname", "Nachname","MailAdresse","Telefonnummer","Adresse","Benutzername","Passwort"};
-    @FXML
-    public void getUsername(String username){
+    /*public void getUsername(String username){
         txt_bn.setText("Hallo! " +username);
 
-    }
+    }*/
 
     public void backTo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Scene2UserController.fxml"));
@@ -76,25 +72,25 @@ public class BenutzerUserController implements Initializable{
     public void updateWerten(ActionEvent event){
         if (updateBox.getValue()== "Benutzername"){
             Database.updateUserBenutzername(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }else if(updateBox.getValue() == "Passwort") {
             Database.updateUserPasswort(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }else if(updateBox.getValue() == "Vorname"){
             Database.updateUserVorname(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }else if(updateBox.getValue() == "Nachname") {
             Database.updateUserNachname(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }else if(updateBox.getValue() == "MailAdresse") {
             Database.updateUserMailAdresse(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }else if(updateBox.getValue() == "Telefonnummer"){
             Database.updateUserTel(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }else if(updateBox.getValue() == "Adresse") {
             Database.updateUserAdresse(txt_bname.getText(),txt_newert.getText());
-            //errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Einfuegen erfolgreich!");
         }
         else{
             System.out.println("False");

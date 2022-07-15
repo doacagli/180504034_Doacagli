@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class KlientAdminController implements Initializable {
+public class FallUserController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -118,12 +118,12 @@ public class KlientAdminController implements Initializable {
     }
     @FXML
     public ObservableList List(){
-        ObservableList arr = Database.listKlient();
+        ObservableList arr = Database.listFallsbetreffende();
 
         return arr;
     }
     public void backTo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Scene2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Scene2UserController.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -134,13 +134,13 @@ public class KlientAdminController implements Initializable {
         System.out.println("you successfully loggod out");
         stage.close();
     }
-    public void deleteKlient(ActionEvent event) throws IOException {
-        Database.deleteKlient(txt_id.getText());
+    public void deleteFallsbetreffende(ActionEvent event) throws IOException {
+        Database.deleteFallsbetreffende(txt_id.getText());
         errorMessage.setText("Erfolgreich");
 
     }
-    public void addKlient(ActionEvent event){
-        Boolean b = Database.addKlient(txt_id.getText(),txt_name.getText(),txt_nname.getText(),txt_adresse.getText(),txt_tel.getText(),DateBox.getValue().toString(),txt_mail.getText(),myChoiceBox.getValue(),txt_dateinnummer.getText());
+    public void addFallsbetreffende(ActionEvent event){
+        Boolean b = Database.addFallsbetreffende(txt_id.getText(),txt_name.getText(),txt_nname.getText(),txt_adresse.getText(),txt_tel.getText(),DateBox.getValue().toString(),txt_mail.getText(),myChoiceBox.getValue(),txt_dateinnummer.getText());
 
         if(b){
             errorMessage.setText("Einfuegen erfolgreich!");
@@ -150,25 +150,25 @@ public class KlientAdminController implements Initializable {
     }
     public void updateWerten(ActionEvent event){
         if (updatebox.getValue()== "Vorname"){
-            Database.updateKlientVorname(txt_id.getText(),txt_name.getText());
+            Database.updateFbVorname(txt_id.getText(),txt_name.getText());
             errorMessage.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "Nachname") {
-            Database.updateKlientNachname(txt_id.getText(), txt_nname.getText());
+            Database.updateFbNachname(txt_id.getText(), txt_nname.getText());
             errorMessage.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "Adresse"){
-            Database.updateKlientAdresse(txt_id.getText(), txt_adresse.getText());
+            Database.updateFbAdresse(txt_id.getText(), txt_adresse.getText());
             errorMessage.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "Telefonnummer") {
-            Database.updateKlientTelefonnummer(txt_id.getText(), txt_tel.getText());
+            Database.updateFbTel(txt_id.getText(), txt_tel.getText());
             errorMessage.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "Geburtsdatum") {
-        Database.updateKlientGeburtsdatum(txt_id.getText(), DateBox.getValue().toString());
-        errorMessage.setText("Aktualisierung erfolgreich!");
+            Database.updateFbGeburtsdatum(txt_id.getText(), DateBox.getValue().toString());
+            errorMessage.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "MailAdresse"){
-            Database.updateKlientMail(txt_id.getText(), txt_mail.getText());
+            Database.updateFbMail(txt_id.getText(), txt_mail.getText());
             errorMessage.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "DateinNummer") {
-            Database.updateKlientDateinNummer(txt_id.getText(), txt_dateinnummer.getText());
+            Database.updateFbDateinNummer(txt_id.getText(), txt_dateinnummer.getText());
             errorMessage.setText("Aktualisierung erfolgreich!");
         }
         else{

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Fallsbetreffende extends Person{
     private String DateinNummer;
 
-    public Fallsbetreffende(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse, String interesse) {
+    public Fallsbetreffende(String vorname, String nachname, String BurgerId, String adresse, String geburtsdatum, String telefonnummer, String geschlecht, String mailAdresse, String DateinNummer) {
         super(vorname, nachname, BurgerId, adresse, geburtsdatum, telefonnummer, geschlecht, mailAdresse);
         this.DateinNummer= DateinNummer;
     }

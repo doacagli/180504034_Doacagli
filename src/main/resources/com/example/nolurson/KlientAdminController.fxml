@@ -42,7 +42,7 @@
    <right>
       <AnchorPane prefHeight="566.0" prefWidth="535.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="table_klient" layoutY="166.0" prefHeight="386.0" prefWidth="532.0">
+            <TableView fx:id="table_klient" layoutY="118.0" prefHeight="447.0" prefWidth="532.0">
                <columns>
                   <TableColumn fx:id="col_nam" prefWidth="111.0" text="Vorname" />
                   <TableColumn fx:id="col_nachn" prefWidth="54.0" text="Nachname" />
@@ -52,7 +52,7 @@
                   <TableColumn fx:id="col_bdate" prefWidth="62.0" text="Geburtsd" />
                   <TableColumn fx:id="col_sex" prefWidth="57.0" text="m/w/d" />
                   <TableColumn fx:id="col_mail" prefWidth="91.0" text="Mail" />
-                  <TableColumn fx:id="col_dateinnm" prefWidth="27.0" text="Datein No" />
+                  <TableColumn fx:id="col_dateinnm" prefWidth="200.0" text="Datein No" />
                </columns>
             </TableView>
             <ButtonBar layoutX="199.0" layoutY="14.0" prefHeight="31.0" prefWidth="322.0">
@@ -69,8 +69,13 @@
                   </Button>
                </buttons>
             </ButtonBar>
-            <Button fx:id="but_update" layoutX="380.0" layoutY="122.0" mnemonicParsing="false" onAction="#updateWerten" text="Aktualiesierung" />
-            <ChoiceBox fx:id="updatebox" layoutX="210.0" layoutY="122.0" prefWidth="150.0" />
+            <Button fx:id="but_update" layoutX="381.0" layoutY="82.0" mnemonicParsing="false" onAction="#updateWerten" text="Aktualiesierung" />
+            <ChoiceBox fx:id="updatebox" layoutX="210.0" layoutY="82.0" prefWidth="150.0" />
+            <Label layoutX="14.0" layoutY="14.0" text="KLIENTVERFAHREN" textFill="DARKRED">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </right>

@@ -1,6 +1,7 @@
 package com.example.nolurson;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,6 +69,8 @@ public class KlientController implements Initializable{
 
     @FXML
     private Label errorMessage;
+    @FXML
+    private TextField txt_suchen;
 
     private String[] Geschlecht ={"W","M","D"};
 
@@ -105,6 +108,8 @@ public class KlientController implements Initializable{
         System.out.println("you successfully loggod out");
         stage.close();
     }
+
+
 
 }
 

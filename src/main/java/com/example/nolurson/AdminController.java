@@ -146,6 +146,7 @@ public class AdminController implements Initializable {
 
     public void deleteBenutzer(ActionEvent event) throws IOException {
         Database.deleteBenutzer(txt_bid.getText());
+        errormess.setText("Erfolgreich");
 
     }
 
@@ -167,16 +168,16 @@ public class AdminController implements Initializable {
     public void updateWerten(ActionEvent event){
         if (updatebox.getValue()== "Benutzername"){
             Database.updateBenutzername(txt_bid.getText(),txt_bn.getText());
-            errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "Passwort") {
             Database.updatePasswort(txt_bid.getText(), txt_pss.getText());
-            errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "Arbeitsstelle"){
             Database.updateArbeitsstelle(txt_bid.getText(), adminbox.getValue());
-            errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Aktualisierung erfolgreich!");
         }else if(updatebox.getValue() == "PersonalID") {
             Database.updatePersonalID(txt_bid.getText(), txt_pid.getText());
-            errormess.setText("Einfuegen erfolgreich!");
+            errormess.setText("Aktualisierung erfolgreich!");
         }
         else{
             System.out.println("False");

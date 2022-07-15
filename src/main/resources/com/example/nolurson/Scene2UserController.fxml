@@ -37,17 +37,17 @@
    <right>
       <AnchorPane prefHeight="566.0" prefWidth="536.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="rechtbutton" layoutX="87.0" layoutY="147.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="RECHTSFALLTERMINEN" textFill="WHITE">
+            <Button fx:id="rechtbutton" layoutX="87.0" layoutY="218.0" mnemonicParsing="false" onAction="#rechtThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="RECHTSFALLTERMINEN" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="36.0" />
                </font>
             </Button>
-            <Button fx:id="klientButton" layoutX="87.0" layoutY="251.0" mnemonicParsing="false" onAction="#klientThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="KUNDENVERFAHREN" textFill="WHITE">
+            <Button fx:id="klientButton" layoutX="87.0" layoutY="301.0" mnemonicParsing="false" onAction="#klientThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="KUNDENVERFAHREN" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="36.0" />
                </font>
             </Button>
-            <Button fx:id="userButton" layoutX="87.0" layoutY="356.0" mnemonicParsing="false" onAction="#popUp" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="BENUTZERVERFAHREN" textFill="WHITE">
+            <Button fx:id="userButton" layoutX="87.0" layoutY="391.0" mnemonicParsing="false" onAction="#popUp" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="BENUTZERVERFAHREN" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="36.0" />
                </font>
@@ -55,6 +55,11 @@
             <Button fx:id="logout" layoutX="492.0" layoutY="7.0" mnemonicParsing="false" onAction="#logOut" prefHeight="31.0" style="-fx-background-color: #8B0000;" text="X" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="fallbutton" layoutX="87.0" layoutY="138.0" mnemonicParsing="false" onAction="#fallThing" prefHeight="65.0" prefWidth="396.0" style="-fx-background-color: #8B0000;" text="FALLSBETREFFENDE" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="36.0" />
                </font>
             </Button>
          </children>
